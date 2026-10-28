@@ -1,0 +1,71 @@
+BOOKBLOOM — VERSÃO COM CÓDIGO MAIS SIMPLES
+Trabalho Prático Integrador de Front-End — Thaís Michel
+
+COMO ABRIR
+1. Extraia o ZIP inteiro.
+2. Abra a pasta BookBloom_Codigo_Simples no Visual Studio Code.
+3. Abra index.html no navegador ou pelo Live Server.
+4. Mantenha a pasta img/ junto de index.html, style.css e script.js.
+
+O QUE FOI SIMPLIFICADO
+- style.css: regras repetidas removidas, layout desktop com CSS Grid e Flexbox simples,
+  menos efeitos visuais e comentários organizados por seção.
+- script.js: nomes de funções simples e menos funções intermediárias.
+- index.html: removidos elementos de decoração sem função e a div da tabela usada
+  anteriormente para telas pequenas.
+- NÃO foram removidos os controles das metas, status da estante, FAQ, modal,
+  filtros de gêneros ou personalização.
+- A versão é destinada a computadores, com largura mínima de 1240 px.
+
+MAPA DOS REQUISITOS DO PROFESSOR
+
+HTML
+- header, nav, main, footer: 1 ocorrência de cada no index.html.
+- section, article e aside: distribuídos nas seções de conteúdo.
+- Menu com ul e li: cabeçalho.
+- Imagens locais jpg: pasta img/, catálogo, hero e galeria.
+- Área de destaque: primeira seção, thais_inicio.
+- Mais de 4 cards: catálogo (9 cards) e galeria (4 itens).
+- Conteúdo principal e lateral: seção de metas, com duas tags aside.
+- Galeria: "O ritual da leitura".
+- Tabela 7x5: 5 colunas, cabeçalho + 6 meses, dentro de thais_metas.
+  O JavaScript atualiza as 6 linhas a partir do mês atual.
+- Formulário: fieldset, legend, label, input, radio, checkbox, select, textarea.
+
+CSS
+- Arquivo externo: style.css, responsável pelo visual principal.
+- Tag: body; classe: .thais_catalogo; ID: #thais_meta_total.
+- Agrupado: h1, h2, h3; encadeado: .thais_menu a:hover.
+- CSS interno: 3 regras na tag style dentro do head do index.html.
+- CSS inline: 2 atributos style no index.html, comentados no código.
+- Classes e IDs identificados pelo prefixo thais_.
+- GRID A: .thais_catalogo -> grid-template-columns: repeat(3, 1fr).
+- GRID B: .thais_grade_metas -> grid-template-columns: 1fr 2fr 1fr.
+
+JAVASCRIPT
+- Validação obrigatória: formulário "Indique um livro". São 7 verificações:
+  nome, e-mail, título, gênero, nota, comentário e checkbox. Usa value,
+  trim(), Number(), if / else if / else, mensagens e reset().
+- Modal dinâmico: clique em "Ver sinopse" no catálogo.
+- Lista dinâmica: estante com adicionar, alterar status, excluir e limpar todos.
+- FAQ: 6 perguntas que abrem e fecham.
+- Troca de cor: azul, laranja, verde e rosa; modo claro/escuro.
+- Extra: filtro de seis gêneros (não é necessário depender dele como abas
+  para cumprir quatro interações, pois as quatro acima já estão presentes).
+
+FUNCIONAMENTO DAS METAS
+- A pessoa escolhe uma meta entre 1 e 120 livros para seis meses.
+- A meta é distribuída pelos meses e a tabela mostra lidos, faltam e situação.
+- Marcar um livro como Concluído conta no mês em que isso aconteceu.
+- Voltar seu status para Lendo ou Quero ler retira essa conclusão.
+- Estante e meta são guardadas em localStorage, neste navegador.
+- O formulário de recomendação é demonstração local; não envia dados.
+
+PARA A DEFESA ORAL
+- Explique a diferença entre Grid A (3 colunas iguais) e Grid B
+  (coluna central duas vezes maior).
+- Identifique os dois exemplos de CSS inline e três de CSS interno.
+- Explique como getElementById encontra o input da meta e como .value lê o número.
+- Explique como createElement, appendChild e remove gerenciam a estante.
+- Explique por que a validação usa preventDefault() e reset().
+- Cada função do script.js tem um comentário com sua finalidade.

@@ -1,0 +1,219 @@
+/* BOOKBLOOM - CSS simples para desktop | Thaís Michel
+   Seletores pedidos: tag (body), classe (.thais_catalogo), ID (#thais_meta_total),
+   agrupado (h1, h2, h3) e encadeado (.thais_menu a:hover).
+*/
+
+/* 1. CORES E ESTILO GERAL */
+:root {
+  --cor: #0757c8;
+  --laranja: #fa5b3b;
+  --amarelo: #ffbd27;
+  --fundo: #fff;
+  --claro: #faf7f1;
+  --cartao: #fff;
+  --texto: #191919;
+  --cinza: #686868;
+  --borda: #e6e1da;
+}
+body.thais_tema_laranja { --cor: #eb5634; }
+body.thais_tema_verde { --cor: #087f68; }
+body.thais_tema_rosa { --cor: #cc376b; }
+body.thais_modo_escuro {
+  --fundo: #17191e;
+  --claro: #252830;
+  --cartao: #202329;
+  --texto: #f6f3ed;
+  --cinza: #c2bdba;
+  --borda: #434550;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 1240px;
+  color: var(--texto);
+  background: var(--fundo);
+  font: 15px/1.5 Arial, sans-serif;
+}
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+img { display: block; max-width: 100%; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0 0 12px; line-height: 1.15; }
+h1, h2 { font-family: Georgia, serif; }
+h2 { font-size: 38px; }
+.thais_container { width: 1200px; margin: auto; }
+.thais_secao { padding: 65px 0; }
+.thais_ponto { color: var(--laranja); }
+.thais_sobretitulo { color: var(--cor); font-size: 12px; font-weight: bold; letter-spacing: 2px; }
+.thais_cabecalho_secao { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 25px; }
+.thais_cabecalho_secao p { color: var(--cinza); }
+.thais_cabecalho_secao .thais_sobretitulo { color: var(--cor); }
+.thais_link_acao { background: none; border: 0; color: var(--cor); font-weight: bold; }
+.thais_link_acao:hover, .thais_link_detalhes:hover { text-decoration: underline; }
+.thais_so_leitor { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); }
+[hidden], .thais_card_livro[hidden] { display: none !important; }
+
+/* 2. MENU E BANNER */
+.thais_header { background: var(--cartao); border-bottom: 1px solid var(--borda); }
+.thais_header_conteudo { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+.thais_logo { font: bold 30px Georgia, serif; }
+.thais_logo b { color: var(--laranja); }
+.thais_logo_icone { color: var(--cor); }
+.thais_menu { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.thais_menu a { font-weight: bold; }
+.thais_menu a:hover { color: var(--laranja); }
+.thais_hero { background: var(--claro); }
+.thais_hero_layout { display: grid; grid-template-columns: 1fr 1fr; }
+.thais_hero_texto { padding: 62px 38px 50px 0; align-self: center; }
+.thais_microtitulo { color: var(--cor); font-size: 12px; font-weight: bold; }
+.thais_hero h1 { font-size: 62px; margin: 15px 0; }
+.thais_hero h1 em { color: var(--laranja); font-style: normal; }
+.thais_hero_texto > p { color: var(--cinza); font-size: 17px; }
+.thais_acoes_hero { display: flex; gap: 12px; margin-top: 25px; }
+.thais_botao { display: inline-block; padding: 11px 20px; border: 1px solid var(--cor); border-radius: 25px; font-weight: bold; text-align: center; }
+.thais_botao_azul { background: var(--cor); color: white; }
+.thais_botao_contorno { color: var(--cor); }
+.thais_hero_visual { position: relative; height: 480px; background: var(--amarelo); overflow: hidden; }
+.thais_hero_visual img { width: 100%; height: 100%; object-fit: cover; }
+.thais_hero_palavras { position: absolute; top: 20px; right: 16px; color: white; font-family: Georgia, serif; text-shadow: 1px 1px 3px #333; }
+
+/* 3. CATÁLOGO - GRID A OBRIGATÓRIO: repeat() e fr */
+.thais_catalogo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.thais_card_livro { display: flex; gap: 12px; padding: 12px; background: var(--cartao); border: 1px solid var(--borda); border-radius: 8px; }
+.thais_capa_botao { flex: 0 0 45%; padding: 0; border: 0; background: none; }
+.thais_capa_botao img { width: 100%; height: 190px; object-fit: cover; border-radius: 5px; }
+.thais_card_livro_texto { display: flex; flex-direction: column; justify-content: center; min-width: 0; }
+.thais_mini_genero { color: var(--cor); text-transform: uppercase; font-size: 11px; font-weight: bold; }
+.thais_card_livro h3 { font-size: 17px; margin: 8px 0; }
+.thais_card_livro p { color: var(--cinza); font-size: 13px; }
+.thais_card_acoes { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+.thais_link_detalhes { color: var(--cor); background: none; border: 0; font-weight: bold; font-size: 13px; }
+.thais_btn_adicionar { width: 30px; height: 30px; border: 1px solid var(--borda); border-radius: 50%; background: var(--claro); color: var(--cor); font-size: 22px; }
+.thais_resultado_catalogo { text-align: right; color: var(--cinza); margin-top: 12px; }
+
+/* 4. SEIS GÊNEROS */
+.thais_faixa_generos { padding: 45px 0; background: var(--claro); }
+.thais_generos { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+.thais_aba_genero { padding: 15px 5px; border: 2px solid transparent; border-radius: 6px; font-weight: bold; }
+.thais_aba_genero span { font-size: 20px; margin-right: 5px; }
+.thais_aba_azul { background: #0757c8; color: white; }
+.thais_aba_laranja { background: #ff653c; color: #111; }
+.thais_aba_amarela { background: #ffbd27; color: #111; }
+.thais_aba_rosa { background: #ff9197; color: #111; }
+.thais_aba_coral { background: #ff8d73; color: #111; }
+.thais_aba_genero[aria-pressed="true"] { outline: 3px solid var(--cor); }
+.thais_info_genero { margin-top: 12px; color: var(--cinza); }
+
+/* 5. MINHA ESTANTE */
+.thais_estante_resumo { display: flex; gap: 10px; align-items: center; }
+.thais_estante_resumo strong { font-size: 35px; color: var(--cor); }
+.thais_adicionar_estante { padding: 18px; background: var(--claro); border: 1px solid var(--borda); }
+.thais_adicionar_estante > label { display: block; margin-bottom: 8px; font-weight: bold; }
+.thais_adicionar_linha { display: flex; gap: 10px; }
+.thais_adicionar_linha input { flex: 1; }
+.thais_adicionar_linha input, .thais_adicionar_linha select, #thais_meta_total, .thais_campo input:not([type="radio"]), .thais_campo select, .thais_campo textarea {
+  padding: 10px; border: 1px solid var(--borda); border-radius: 5px;
+  background: var(--cartao); color: var(--texto);
+}
+.thais_lista_estante { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 0; list-style: none; }
+.thais_item_estante { padding: 16px; border: 1px solid var(--borda); background: var(--cartao); border-radius: 8px; }
+.thais_item_estante_topo { display: flex; justify-content: space-between; align-items: start; gap: 8px; }
+.thais_item_estante h3 { font-size: 16px; }
+.thais_estado { padding: 4px 7px; border-radius: 12px; background: #ffebb9; color: #493800; font-size: 12px; }
+.thais_concluido .thais_estado { background: #c8f2d9; color: #105434; }
+.thais_concluido h3 { text-decoration: line-through; }
+.thais_item_estante_botoes, .thais_estante_rodape { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
+.thais_controle_status { font-size: 12px; font-weight: bold; }
+.thais_controle_status select { margin-left: 6px; padding: 5px; background: var(--claro); color: var(--texto); border: 1px solid var(--borda); }
+.thais_remover { border: 0; background: none; color: #cd3737; font-weight: bold; }
+#thais_feedback_estante { color: var(--cinza); }
+
+/* 6. METAS - GRID B OBRIGATÓRIO: 1fr 2fr 1fr */
+.thais_faixa_metas { padding: 65px 0; background: var(--claro); }
+.thais_grade_metas { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 15px; }
+.thais_painel_lateral, .thais_painel_tabela { padding: 20px; border-radius: 6px; min-width: 0; }
+.thais_painel_dicas { background: var(--amarelo); color: #171717; }
+.thais_painel_citacao { background: #0757c8; color: white; }
+.thais_painel_tabela { background: var(--cartao); border: 1px solid var(--borda); }
+.thais_icone_lateral { font-size: 42px; }
+.thais_painel_lateral h3 { margin: 14px 0; }
+.thais_painel_lateral p { margin-bottom: 25px; }
+.thais_painel_citacao p { font: bold 22px Georgia, serif; }
+.thais_painel_lateral strong { font-size: 12px; }
+.thais_form_meta { margin: 16px 0; padding: 14px; background: var(--claro); }
+.thais_form_meta label { display: block; font-weight: bold; margin-bottom: 8px; }
+.thais_meta_campos { display: flex; align-items: center; gap: 8px; }
+#thais_meta_total { width: 70px; }
+.thais_meta_campos .thais_botao { padding: 9px 12px; border-radius: 5px; }
+.thais_progresso_texto { display: flex; justify-content: space-between; font-weight: bold; }
+.thais_barra_meta { height: 10px; background: var(--claro); margin: 8px 0; border-radius: 10px; overflow: hidden; }
+#thais_barra_progresso { width: 0; height: 100%; background: var(--cor); }
+#thais_mensagem_meta, #thais_legenda_metas { font-size: 12px; color: var(--cinza); margin: 8px 0 14px; }
+.thais_tabela { width: 100%; border-collapse: collapse; font-size: 12px; }
+.thais_tabela th, .thais_tabela td { padding: 9px 5px; border-bottom: 1px solid var(--borda); text-align: left; }
+.thais_tabela thead { background: var(--claro); }
+.thais_status { font-size: 11px; font-weight: bold; }
+.thais_status_ok { color: #15924b; }
+.thais_status_meio { color: #af7400; }
+.thais_status_pendente { color: var(--cinza); }
+
+/* 7. GALERIA DE IMAGENS */
+.thais_galeria { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+.thais_card_ritual { margin: 0; background: var(--cartao); border: 1px solid var(--borda); border-bottom: 4px solid var(--laranja); }
+.thais_card_ritual img { width: 100%; height: 175px; object-fit: cover; }
+.thais_card_ritual figcaption { padding: 15px; }
+.thais_etapa_ritual { font-size: 11px; font-weight: bold; color: var(--cor); }
+.thais_card_ritual h3 { font-size: 18px; margin-top: 8px; }
+.thais_card_ritual p { color: var(--cinza); font-size: 14px; }
+.thais_ritual_lembrete { margin-top: 20px; padding: 12px; background: var(--claro); border-left: 4px solid var(--laranja); }
+
+/* 8. PERSONALIZAÇÃO: 4 CORES + CLARO/ESCURO */
+.thais_estilo_faixa { background: var(--claro); padding: 18px 0; }
+.thais_estilo_conteudo { display: flex; align-items: center; justify-content: space-between; }
+.thais_personalizacao { display: flex; align-items: center; gap: 10px; }
+.thais_cor { width: 25px; height: 25px; border: 1px solid #aaa; border-radius: 50%; }
+.thais_cor_azul { background: #0757c8; }
+.thais_cor_laranja { background: #eb5634; }
+.thais_cor_verde { background: #087f68; }
+.thais_cor_rosa { background: #cc376b; }
+.thais_cor[aria-pressed="true"] { outline: 2px solid var(--texto); }
+.thais_modo_botao { padding: 6px 12px; border: 1px solid var(--borda); background: var(--cartao); color: var(--texto); }
+
+/* 9. FAQ E FORMULÁRIO */
+.thais_faq_fundo { background: var(--claro); }
+.thais_faq_grade { display: grid; grid-template-columns: 1fr 1.5fr; gap: 70px; }
+.thais_pergunta { border-bottom: 1px solid var(--borda); }
+.thais_pergunta_botao { width: 100%; padding: 14px 0; background: none; border: 0; color: var(--texto); font-weight: bold; text-align: left; display: flex; justify-content: space-between; }
+.thais_resposta { padding-bottom: 16px; color: var(--cinza); }
+.thais_recomendacao { display: grid; grid-template-columns: 1fr 1.3fr; gap: 55px; }
+.thais_recomendacao_esquerda > p { color: var(--cinza); }
+.thais_formulario { padding: 25px; background: var(--claro); border: 1px solid var(--borda); }
+.thais_formulario fieldset { border: 0; padding: 0; margin: 0; }
+.thais_formulario legend { font-size: 20px; font-weight: bold; margin-bottom: 16px; }
+.thais_campos_duplos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.thais_campo { margin-bottom: 14px; }
+.thais_campo > label, .thais_label_grupo { display: block; margin-bottom: 5px; font-weight: bold; }
+.thais_campo input:not([type="radio"]), .thais_campo select, .thais_campo textarea { width: 100%; }
+.thais_radios { display: flex; gap: 15px; }
+.thais_checkbox { display: flex; gap: 8px; margin-bottom: 10px; }
+.thais_mensagem_form { min-height: 24px; font-weight: bold; }
+.thais_erro { color: #c93939; }
+.thais_sucesso { color: #16834d; }
+.thais_botao_enviar { width: 100%; border-radius: 5px; }
+
+/* 10. RODAPÉ E MODAL */
+.thais_footer { background: #101522; color: white; padding: 35px 0; }
+.thais_footer_conteudo { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; }
+.thais_footer_links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 13px; }
+.thais_footer_autoria { text-align: right; font-size: 13px; }
+#thais_credito_final { color: #ccc; font-size: 12px; }
+.thais_modal { width: 720px; padding: 30px; border: 0; border-radius: 12px; background: var(--cartao); color: var(--texto); }
+.thais_modal::backdrop { background: #0009; }
+.thais_modal_conteudo { display: grid; grid-template-columns: 210px 1fr; gap: 25px; }
+.thais_modal_conteudo img { width: 210px; height: 210px; object-fit: cover; }
+.thais_modal_autor { color: var(--cinza); margin-bottom: 15px; }
+.thais_modal_conteudo h3 { margin-top: 15px; }
+.thais_modal_conteudo p { margin-bottom: 15px; }
+.thais_modal_fechar { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: var(--texto); font-size: 30px; }

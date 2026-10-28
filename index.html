@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BookShelf: descubra livros, monte sua estante e acompanhe suas metas de leitura.">
+  <title>BookShelf</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- CSS INTERNO com 3 elementos -->
+  <style>
+    #thais_chamada_hero { text-transform: uppercase; }
+    #thais_legenda_metas { font-style: italic; }
+    #thais_credito_final { letter-spacing: 0.07em; }
+  </style>
+</head>
+<body class="thais_tema_azul">
+  <header class="thais_header">
+    <div class="thais_container thais_header_conteudo">
+      <a href="#thais_inicio" class="thais_logo" aria-label="BookBloom, voltar ao início">
+        <span class="thais_logo_icone" aria-hidden="true">✦</span><span>Book<b>Shelf</b></span>
+      </a>
+      <nav aria-label="Menu principal">
+        <ul class="thais_menu">
+          <li><a href="#thais_inicio">Início</a></li>
+          <li><a href="#thais_explorar">Explorar</a></li>
+          <li><a href="#thais_estante">Estante</a></li>
+          <li><a href="#thais_metas">Metas</a></li>
+          <li><a href="#thais_faq">FAQ</a></li>
+          <li><a href="#thais_contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="thais_inicio" class="thais_hero">
+      <div class="thais_container thais_hero_layout">
+        <div class="thais_hero_texto">
+          <!-- CSS INLINE 1: exceção intencional exigida pelo professor. -->
+          <span id="thais_chamada_hero" class="thais_microtitulo" style="letter-spacing: .20em;">Mais livros. Mais vida.</span>
+          <h1>Descubra histórias que ficam <em>com você.</em></h1>
+          <p>Explore novos mundos, organize suas leituras e encontre sua próxima história favorita!</p>
+          <div class="thais_acoes_hero">
+            <a class="thais_botao thais_botao_azul" href="#thais_explorar">Explorar livros <span aria-hidden="true">→</span></a>
+            <a class="thais_botao thais_botao_contorno" href="#thais_estante">Ver minha estante</a>
+          </div>
+        </div>
+        <div class="thais_hero_visual">
+          <img src="img/banner.jfif" alt="Pintura de gatinho lendo livro" width="1040" height="716">
+        </div>
+      </div>
+    </section>
+
+    <section id="thais_explorar" class="thais_secao thais_container">
+      <div class="thais_cabecalho_secao">
+        <div>
+          <p class="thais_sobretitulo">CATÁLOGO DA ESTANTE</p>
+          <h2>Livros em destaque<span class="thais_ponto">.</span></h2>
+          <p>Histórias incríveis para descobrir e adicionar à sua lista.</p>
+        </div>
+        <button id="thais_limpar_filtros" type="button" class="thais_link_acao">Ver todos os livros →</button>
+      </div>
+      <div id="thais_catalogo" class="thais_catalogo">
+        <article class="thais_card_livro" data-genero="fantasia">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="A Biblioteca da Meia-Noite" aria-label="Conhecer o livro A Biblioteca da Meia-Noite">
+            <img src="img/biblioteca-meia-noite.jpg" alt="Capa ilustrativa de A Biblioteca da Meia-Noite" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Fantasia</span>
+            <h3>A Biblioteca da Meia-Noite</h3>
+            <p>Matt Haig</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="A Biblioteca da Meia-Noite">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="A Biblioteca da Meia-Noite" aria-label="Adicionar A Biblioteca da Meia-Noite à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="ficcao">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Torto Arado" aria-label="Conhecer o livro Torto Arado">
+            <img src="img/torto-arado.jpg" alt="Capa ilustrativa de Torto Arado" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Ficção</span>
+            <h3>Torto Arado</h3>
+            <p>Itamar Vieira Junior</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Torto Arado">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Torto Arado" aria-label="Adicionar Torto Arado à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="suspense">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Verity" aria-label="Conhecer o livro Verity">
+            <img src="img/verity.jpg" alt="Capa ilustrativa de Verity" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Suspense</span>
+            <h3>Verity</h3>
+            <p>Colleen Hoover</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Verity">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Verity" aria-label="Adicionar Verity à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="ficcao">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Pequenas Grandes Coisas" aria-label="Conhecer o livro Pequenas Grandes Coisas">
+            <img src="img/pequenas-grandes-coisas.jpg" alt="Capa ilustrativa de Pequenas Grandes Coisas" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Ficção</span>
+            <h3>Pequenas Grandes Coisas</h3>
+            <p>Jodi Picoult</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Pequenas Grandes Coisas">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Pequenas Grandes Coisas" aria-label="Adicionar Pequenas Grandes Coisas à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="classicos">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Cem Anos de Solidão" aria-label="Conhecer o livro Cem Anos de Solidão">
+            <img src="img/cem-anos.jpg" alt="Capa ilustrativa de Cem Anos de Solidão" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Clássicos</span>
+            <h3>Cem Anos de Solidão</h3>
+            <p>Gabriel García Márquez</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Cem Anos de Solidão">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Cem Anos de Solidão" aria-label="Adicionar Cem Anos de Solidão à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="suspense">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="A Paciente Silenciosa" aria-label="Conhecer o livro A Paciente Silenciosa">
+            <img src="img/paciente-silenciosa.jpg" alt="Capa ilustrativa de A Paciente Silenciosa" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Suspense</span>
+            <h3>A Paciente Silenciosa</h3>
+            <p>Alex Michaelides</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="A Paciente Silenciosa">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="A Paciente Silenciosa" aria-label="Adicionar A Paciente Silenciosa à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="fantasia">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="O Hobbit" aria-label="Conhecer o livro O Hobbit">
+            <img src="img/hobbit.jpg" alt="Capa ilustrativa de O Hobbit" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Fantasia</span>
+            <h3>O Hobbit</h3>
+            <p>J. R. R. Tolkien</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="O Hobbit">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="O Hobbit" aria-label="Adicionar O Hobbit à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="nao-ficcao">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Sapiens" aria-label="Conhecer o livro Sapiens">
+            <img src="img/sapiens.jpg" alt="Capa ilustrativa de Sapiens" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Não ficção</span>
+            <h3>Sapiens</h3>
+            <p>Yuval Noah Harari</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Sapiens">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Sapiens" aria-label="Adicionar Sapiens à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+        <article class="thais_card_livro" data-genero="romance">
+          <button class="thais_capa_botao thais_abrir_livro" type="button" data-titulo="Orgulho e Preconceito" aria-label="Conhecer o livro Orgulho e Preconceito">
+            <img src="img/orgulho-preconceito.jpg" alt="Capa ilustrativa de Orgulho e Preconceito" width="600" height="600" loading="lazy">
+          </button>
+          <div class="thais_card_livro_texto">
+            <span class="thais_mini_genero">Romance</span>
+            <h3>Orgulho e Preconceito</h3>
+            <p>Jane Austen</p>
+            <div class="thais_card_acoes">
+              <button class="thais_abrir_livro thais_link_detalhes" type="button" data-titulo="Orgulho e Preconceito">Ver sinopse <span aria-hidden="true">↗</span></button>
+              <button class="thais_adicionar_catalogo thais_btn_adicionar" type="button" data-titulo="Orgulho e Preconceito" aria-label="Adicionar Orgulho e Preconceito à estante" title="Adicionar à estante">＋</button>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p id="thais_resultado_catalogo" class="thais_resultado_catalogo" aria-live="polite">9 livros no catálogo.</p>
+    </section>
+
+    <section class="thais_faixa_generos" aria-labelledby="thais_titulo_generos">
+      <div class="thais_container">
+        <div class="thais_cabecalho_secao thais_cabecalho_generos">
+          <div><p class="thais_sobretitulo">PARA CADA TIPO DE LEITOR</p><h2 id="thais_titulo_generos">Explore por gênero<span class="thais_ponto">.</span></h2></div>
+          <p>Escolha uma categoria e descubra uma nova leitura.</p>
+        </div>
+        <div class="thais_generos" role="group" aria-label="Seis abas para filtrar gêneros">
+          <button type="button" class="thais_aba_genero thais_aba_azul" data-genero="ficcao" aria-pressed="false"><span aria-hidden="true">▣</span> Ficção</button>
+          <button type="button" class="thais_aba_genero thais_aba_laranja" data-genero="romance" aria-pressed="false"><span aria-hidden="true">♡</span> Romance</button>
+          <button type="button" class="thais_aba_genero thais_aba_amarela" data-genero="suspense" aria-pressed="false"><span aria-hidden="true">◎</span> Suspense</button>
+          <button type="button" class="thais_aba_genero thais_aba_rosa" data-genero="fantasia" aria-pressed="false"><span aria-hidden="true">✧</span> Fantasia</button>
+          <button type="button" class="thais_aba_genero thais_aba_azul" data-genero="nao-ficcao" aria-pressed="false"><span aria-hidden="true">▤</span> Não ficção</button>
+          <button type="button" class="thais_aba_genero thais_aba_coral" data-genero="classicos" aria-pressed="false"><span aria-hidden="true">♜</span> Clássicos</button>
+        </div>
+        <p id="thais_info_genero" class="thais_info_genero" aria-live="polite">Selecione uma categoria para filtrar o catálogo.</p>
+      </div>
+    </section>
+
+    <section id="thais_estante" class="thais_secao thais_container thais_estante_secao">
+      <div class="thais_cabecalho_secao">
+        <div><p class="thais_sobretitulo">SEUS LIVROS, DO SEU JEITO</p><h2>Minha estante<span class="thais_ponto">.</span></h2><p>Adicione livros, altere o status quando quiser e acompanhe seu progresso.</p></div>
+        <div class="thais_estante_resumo" aria-live="polite"><strong id="thais_numero_livros">0</strong><span>livros na estante</span></div>
+      </div>
+      <form id="thais_form_estante" class="thais_adicionar_estante">
+        <label for="thais_novo_livro">Adicionar um livro à estante</label>
+        <div class="thais_adicionar_linha">
+          <input id="thais_novo_livro" type="text" placeholder="Digite o título de um livro" maxlength="70" required>
+          <label for="thais_novo_status" class="thais_so_leitor">Estado da leitura</label>
+          <select id="thais_novo_status"><option value="Quero ler">Quero ler</option><option value="Lendo">Lendo</option><option value="Concluído">Concluído</option></select>
+          <button type="submit" class="thais_botao thais_botao_azul">+ Adicionar</button>
+        </div>
+      </form>
+      <ul id="thais_lista_estante" class="thais_lista_estante" aria-label="Livros da estante"></ul>
+      <div class="thais_estante_rodape"><span id="thais_feedback_estante" role="status">Altere o status de cada livro pelo seletor: Quero ler, Lendo ou Concluído.</span><button type="button" class="thais_link_acao" id="thais_limpar_estante">Limpar minha estante ✕</button></div>
+    </section>
+
+    <section id="thais_metas" class="thais_faixa_metas">
+      <div class="thais_container">
+        <div class="thais_cabecalho_secao">
+          <div>
+            <p class="thais_sobretitulo">UM CAPÍTULO DE CADA VEZ</p>
+            <h2>Suas metas de leitura<span class="thais_ponto">.</span></h2>
+            <p>Defina quantos livros deseja ler nos próximos seis meses. Sua estante atualiza o progresso automaticamente.</p>
+          </div>
+        </div>
+        <!-- GRID B OBRIGATÓRIO: proporção 1fr 2fr 1fr -->
+        <div class="thais_grade_metas">
+          <aside class="thais_painel_lateral thais_painel_dicas" aria-labelledby="thais_titulo_dicas">
+            <span class="thais_icone_lateral" aria-hidden="true">✳</span>
+            <h3 id="thais_titulo_dicas">Seu ritmo importa</h3>
+            <p>Escolha uma meta possível para sua rotina. Cada livro marcado como <strong>Concluído</strong> na estante conta no mês da conclusão.</p>
+            <strong>UM LIVRO DE CADA VEZ →</strong>
+          </aside>
+          <div class="thais_painel_tabela">
+            <h3>Meu desafio de leitura</h3>
+            <form id="thais_form_meta" class="thais_form_meta">
+              <label for="thais_meta_total">Quero concluir, nos próximos 6 meses:</label>
+              <div class="thais_meta_campos">
+                <input id="thais_meta_total" name="meta_total" type="number" min="1" max="120" step="1" value="12" required>
+                <span>livros</span>
+                <button class="thais_botao thais_botao_azul" type="submit">Salvar meta</button>
+              </div>
+            </form>
+            <div class="thais_painel_progresso" aria-live="polite">
+              <div class="thais_progresso_texto"><strong id="thais_meta_contador">1 de 12 livros concluídos</strong><span id="thais_meta_porcentagem">8%</span></div>
+              <div class="thais_barra_meta" role="progressbar" aria-label="Progresso da meta de leitura" aria-valuemin="0" aria-valuemax="100" aria-valuenow="8"><div id="thais_barra_progresso"></div></div>
+              <p id="thais_mensagem_meta" role="status" aria-live="polite">Personalize sua meta quando quiser.</p>
+            </div>
+            <!-- TABELA OBRIGATÓRIA: 7 linhas (1 cabeçalho + 6 meses) e 5 colunas -->
+              <table class="thais_tabela">
+                <caption class="thais_so_leitor">Acompanhamento personalizado da leitura nos próximos seis meses</caption>
+                <thead><tr><th scope="col">Mês</th><th scope="col">Meta</th><th scope="col">Lidos</th><th scope="col">Faltam</th><th scope="col">Situação</th></tr></thead>
+                <tbody id="thais_tabela_metas_corpo">
+                  <tr><th scope="row">Outubro</th><td>2</td><td>1</td><td>1</td><td>Pendente</td></tr>
+                  <tr><th scope="row">Novembro</th><td>2</td><td>0</td><td>2</td><td>Pendente</td></tr>
+                  <tr><th scope="row">Dezembro</th><td>2</td><td>0</td><td>2</td><td>Pendente</td></tr>
+                  <tr><th scope="row">Janeiro</th><td>2</td><td>0</td><td>2</td><td>Pendente</td></tr>
+                  <tr><th scope="row">Fevereiro</th><td>2</td><td>0</td><td>2</td><td>Pendente</td></tr>
+                  <tr><th scope="row">Março</th><td>2</td><td>0</td><td>2</td><td>Pendente</td></tr>
+                </tbody>
+              </table>
+            <p id="thais_legenda_metas">A meta é distribuída entre os seis meses, e cada conclusão é registrada automaticamente.</p>
+          </div>
+          <aside class="thais_painel_lateral thais_painel_citacao" aria-label="Resumo da sua meta">
+            <span class="thais_icone_lateral" aria-hidden="true">↗</span>
+            <h3>Sua conquista</h3>
+            <p id="thais_resumo_metas">Você está construindo seu hábito de leitura!</p>
+            <strong id="thais_frase_metas">CONTINUE SUA JORNADA ✦</strong>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA OBRIGATÓRIA: imagens JPG locais acompanhadas de dicas visíveis. -->
+    <section id="thais_galeria" class="thais_secao thais_container" aria-labelledby="thais_titulo_ritual">
+      <div class="thais_cabecalho_secao">
+        <div>
+          <p class="thais_sobretitulo">HÁBITOS QUE CABEM NA SUA ROTINA</p>
+          <h2 id="thais_titulo_ritual">O ritual da leitura<span class="thais_ponto">.</span></h2>
+          <p>Quatro ideias simples para aproveitar mais cada livro — sem pressa e sem transformar a leitura em obrigação.</p>
+        </div>
+      </div>
+      <div class="thais_galeria" aria-label="Galeria com quatro dicas para o hábito de leitura">
+        <figure class="thais_card_ritual">
+          <img src="img/ritual-cantinho.jpg" alt="Livro aberto e xícara de café em um cantinho de leitura" width="696" height="420" loading="lazy">
+          <figcaption>
+            <span class="thais_etapa_ritual">01 / PREPARE O AMBIENTE</span>
+            <h3>Crie seu espaço de leitura</h3>
+            <p>Escolha um lugar confortável e com boa iluminação. Deixe seu livro à mão para facilitar o início de cada sessão.</p>
+          </figcaption>
+        </figure>
+        <figure class="thais_card_ritual">
+          <img src="img/ritual-rotina.jpg" alt="Pilha de livros ao lado de um relógio despertador" width="696" height="420" loading="lazy">
+          <figcaption>
+            <span class="thais_etapa_ritual">02 / RESERVE UM MOMENTO</span>
+            <h3>Estabeleça uma rotina</h3>
+            <p>Separe 10 ou 15 minutos do seu dia. Ler um pouco com frequência pode ser mais fácil do que esperar o momento perfeito.</p>
+          </figcaption>
+        </figure>
+        <figure class="thais_card_ritual">
+          <img src="img/ritual-anotacoes.jpg" alt="Caderno aberto com anotações e caneta sobre uma mesa" width="696" height="420" loading="lazy">
+          <figcaption>
+            <span class="thais_etapa_ritual">03 / GUARDE AS IDEIAS</span>
+            <h3>Registre suas impressões</h3>
+            <p>Anote uma frase, um personagem ou algo que fez você pensar. Suas observações ajudam a lembrar cada história.</p>
+          </figcaption>
+        </figure>
+        <figure class="thais_card_ritual">
+          <img src="img/ritual-desconectar.jpg" alt="Livro sobre uma manta macia em um ambiente aconchegante" width="696" height="420" loading="lazy">
+          <figcaption>
+            <span class="thais_etapa_ritual">04 / APROVEITE A HISTÓRIA</span>
+            <h3>Deixe as distrações de lado</h3>
+            <p>Silencie notificações por alguns minutos e mergulhe nas páginas. Não importa a velocidade: aproveite a experiência.</p>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="thais_ritual_lembrete"><span aria-hidden="true">✳</span> Um capítulo por vez. O melhor ritual é aquele que funciona para você.</p>
+    </section>
+
+    <section id="thais_estilo" class="thais_estilo_faixa" aria-label="Personalização do BookBloom">
+      <div class="thais_container thais_estilo_conteudo">
+        <p><strong>O BookBloom do seu jeito.</strong> Escolha uma cor e alterne entre modo claro e escuro.</p>
+  <div class="thais_personalizacao" aria-label="Personalização do site">
+    <span>Seu estilo:</span>
+    <!-- CSS INLINE 2: demonstra a segunda aplicação do estilo inline. -->
+    <button type="button" class="thais_cor thais_cor_azul" data-tema="azul" aria-label="Tema azul" aria-pressed="true" style="outline-offset: 3px;"></button>
+    <button type="button" class="thais_cor thais_cor_laranja" data-tema="laranja" aria-label="Tema laranja" aria-pressed="false"></button>
+    <button type="button" class="thais_cor thais_cor_verde" data-tema="verde" aria-label="Tema verde" aria-pressed="false"></button>
+    <button type="button" class="thais_cor thais_cor_rosa" data-tema="rosa" aria-label="Tema rosa" aria-pressed="false"></button>
+    <button type="button" id="thais_alternar_modo" class="thais_modo_botao" aria-pressed="false">☾ Escuro</button>
+  </div>
+
+      </div>
+    </section>
+
+    <section id="thais_faq" class="thais_secao thais_faq_fundo">
+      <div class="thais_container thais_faq_grade">
+        <div><p class="thais_sobretitulo">BOAS PERGUNTAS, BOAS HISTÓRIAS</p><h2>Perguntas frequentes<span class="thais_ponto">.</span></h2><p>Tire suas dúvidas sobre o uso da BookBloom.</p></div>
+        <div class="thais_acordeao">
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">O BookBloom é uma livraria?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Não. É um projeto acadêmico de portal literário para descobrir títulos e organizar leituras.</p></div>
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">Como adiciono um livro à minha estante?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Use o botão + em um card do catálogo ou digite um título na seção Minha estante.</p></div>
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">Posso marcar um livro como concluído?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Sim. Em cada livro, use o seletor Alterar status e escolha Quero ler, Lendo ou Concluído. Sua meta é atualizada automaticamente.</p></div>
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">Os livros continuam salvos depois de atualizar?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Sim, neste navegador. O BookBloom usa localStorage para guardar sua estante e suas metas no próprio dispositivo, sem servidor.</p></div>
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">Como encontro livros por gênero?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Clique em uma das seis categorias na área Gêneros; o catálogo mostrará apenas os títulos da categoria.</p></div>
+          <div class="thais_pergunta"><button type="button" class="thais_pergunta_botao" aria-expanded="false">Posso recomendar uma leitura?<span aria-hidden="true">＋</span></button><p class="thais_resposta" hidden>Sim. Preencha o formulário de recomendação. A validação aparece na página, mas os dados não são enviados a um servidor.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="thais_contato" class="thais_secao thais_container thais_recomendacao">
+      <div class="thais_recomendacao_esquerda">
+        <p class="thais_sobretitulo">LEITURA BOA É LEITURA COMPARTILHADA</p>
+        <h2>Indique um livro que marcou você<span class="thais_ponto">.</span></h2>
+        <p>Preencha o formulário e pratique o hábito de compartilhar boas histórias.</p>
+      </div>
+      <form id="thais_formulario" class="thais_formulario" novalidate>
+        <fieldset>
+          <legend>Sua recomendação</legend>
+          <div class="thais_campos_duplos">
+            <div class="thais_campo"><label for="thais_nome">Seu nome *</label><input type="text" id="thais_nome" placeholder="Como podemos chamar você?"></div>
+            <div class="thais_campo"><label for="thais_email">E-mail *</label><input type="email" id="thais_email" placeholder="voce@exemplo.com"></div>
+          </div>
+          <div class="thais_campos_duplos">
+            <div class="thais_campo"><label for="thais_livro_indicado">Título do livro *</label><input type="text" id="thais_livro_indicado" placeholder="Qual livro indica?"></div>
+            <div class="thais_campo"><label for="thais_genero_indicado">Gênero *</label><select id="thais_genero_indicado"><option value="">Selecione...</option><option>Ficção</option><option>Romance</option><option>Suspense</option><option>Fantasia</option><option>Não ficção</option><option>Clássicos</option></select></div>
+          </div>
+          <div class="thais_campo"><span class="thais_label_grupo">Avaliação *</span><div class="thais_radios"><label><input type="radio" name="thais_nota" value="3"> 3 estrelas</label><label><input type="radio" name="thais_nota" value="4"> 4 estrelas</label><label><input type="radio" name="thais_nota" value="5"> 5 estrelas</label></div></div>
+          <div class="thais_campo"><label for="thais_comentario">Por que recomenda? *</label><textarea id="thais_comentario" rows="4" placeholder="Conte em pelo menos 15 caracteres..."></textarea></div>
+          <label class="thais_checkbox"><input id="thais_confirmacao" type="checkbox"> Confirmo que revisei minha indicação *</label>
+          <p id="thais_mensagem_form" class="thais_mensagem_form" role="status" aria-live="polite"></p>
+          <button type="submit" class="thais_botao thais_botao_azul thais_botao_enviar">Enviar recomendação →</button>
+        </fieldset>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="thais_footer">
+    <div class="thais_container thais_footer_conteudo">
+      <div><a class="thais_logo thais_logo_footer" href="#thais_inicio"><span class="thais_logo_icone" aria-hidden="true">✦</span><span>Book<b>Bloom</b></span></a><p id="thais_credito_final">Histórias que florescem.</p></div>
+      <div class="thais_footer_links"><a href="#thais_explorar">Explorar</a><a href="#thais_estante">Estante</a><a href="#thais_metas">Metas</a><a href="#thais_galeria">Ritual de leitura</a><a href="#thais_faq">FAQ</a><a href="#thais_contato">Contato</a></div>
+      <div class="thais_footer_autoria"><p>Projeto acadêmico de Front-End</p><p>Desenvolvido por Thaís Michel · 2026</p></div>
+    </div>
+  </footer>
+
+
+  <dialog id="thais_modal" class="thais_modal" aria-labelledby="thais_modal_titulo">
+    <button type="button" id="thais_fechar_modal" class="thais_modal_fechar" aria-label="Fechar detalhes">×</button>
+    <div class="thais_modal_conteudo"><img id="thais_modal_imagem" src="img/biblioteca-meia-noite.jpg" alt="Capa do livro selecionado" width="600" height="600"><div><span id="thais_modal_genero" class="thais_sobretitulo"></span><h2 id="thais_modal_titulo"></h2><p id="thais_modal_autor" class="thais_modal_autor"></p><h3>Sinopse</h3><p id="thais_modal_sinopse"></p><button id="thais_modal_adicionar" class="thais_botao thais_botao_azul" type="button">+ Adicionar à estante</button></div></div>
+  </dialog>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
