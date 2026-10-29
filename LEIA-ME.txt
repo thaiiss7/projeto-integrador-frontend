@@ -1,71 +1,50 @@
-BOOKBLOOM — VERSÃO COM CÓDIGO MAIS SIMPLES
-Trabalho Prático Integrador de Front-End — Thaís Michel
+BOOKSHELF — PROJETO FRONT-END (VERSÃO SIMPLIFICADA)
 
-COMO ABRIR
-1. Extraia o ZIP inteiro.
-2. Abra a pasta BookBloom_Codigo_Simples no Visual Studio Code.
-3. Abra index.html no navegador ou pelo Live Server.
-4. Mantenha a pasta img/ junto de index.html, style.css e script.js.
+ABRIR O PROJETO
+1. Extraia o arquivo ZIP.
+2. Abra index.html no navegador ou com Live Server no VS Code.
+3. O projeto é destinado a computadores, com largura mínima de 1240px.
 
-O QUE FOI SIMPLIFICADO
-- style.css: regras repetidas removidas, layout desktop com CSS Grid e Flexbox simples,
-  menos efeitos visuais e comentários organizados por seção.
-- script.js: nomes de funções simples e menos funções intermediárias.
-- index.html: removidos elementos de decoração sem função e a div da tabela usada
-  anteriormente para telas pequenas.
-- NÃO foram removidos os controles das metas, status da estante, FAQ, modal,
-  filtros de gêneros ou personalização.
-- A versão é destinada a computadores, com largura mínima de 1240 px.
+ARQUIVOS
+- index.html: estrutura, conteúdo, 2 exemplos de CSS inline e 3 seletores no CSS interno.
+- style.css: cores, espaçamentos, catálogo, estante, metas, galeria e formulário.
+- script.js: filtros, modal, estante, metas personalizadas, FAQ, temas e validação.
+- img/: capas de livros, fotos da galeria e o banner.
 
-MAPA DOS REQUISITOS DO PROFESSOR
+MUDANÇAS INCORPORADAS AO HTML
+- Nome no topo: BookShelf (conforme seu arquivo).
+- Texto da seção principal atualizado conforme seu arquivo.
+- Banner com src="img/banner.jfif".
+- Rodapé e perguntas frequentes ajustados para BookShelf.
+- <title> inclui 'Thaís Michel', exigido pelo enunciado.
 
-HTML
-- header, nav, main, footer: 1 ocorrência de cada no index.html.
-- section, article e aside: distribuídos nas seções de conteúdo.
-- Menu com ul e li: cabeçalho.
-- Imagens locais jpg: pasta img/, catálogo, hero e galeria.
-- Área de destaque: primeira seção, thais_inicio.
-- Mais de 4 cards: catálogo (9 cards) e galeria (4 itens).
-- Conteúdo principal e lateral: seção de metas, com duas tags aside.
-- Galeria: "O ritual da leitura".
-- Tabela 7x5: 5 colunas, cabeçalho + 6 meses, dentro de thais_metas.
-  O JavaScript atualiza as 6 linhas a partir do mês atual.
-- Formulário: fieldset, legend, label, input, radio, checkbox, select, textarea.
+IMPORTANTE SOBRE A IMAGEM DO BANNER
+A imagem banner.jfif não estava anexada ao HTML enviado. Foi adicionada uma
+ilustração provisória de um gato lendo para evitar imagem quebrada. Se você
+já possui sua pintura original, basta substituir img/banner.jfif por ela,
+com o mesmo nome, sem alterar o HTML.
 
-CSS
-- Arquivo externo: style.css, responsável pelo visual principal.
-- Tag: body; classe: .thais_catalogo; ID: #thais_meta_total.
-- Agrupado: h1, h2, h3; encadeado: .thais_menu a:hover.
-- CSS interno: 3 regras na tag style dentro do head do index.html.
-- CSS inline: 2 atributos style no index.html, comentados no código.
-- Classes e IDs identificados pelo prefixo thais_.
-- GRID A: .thais_catalogo -> grid-template-columns: repeat(3, 1fr).
-- GRID B: .thais_grade_metas -> grid-template-columns: 1fr 2fr 1fr.
+REQUISITOS DO PROFESSOR
+- header, nav, main e footer usados uma vez; section, article e aside.
+- menu em ul/li; imagens locais; banner; 9 cards; galeria com 4 imagens.
+- tabela 7x5: um cabeçalho e seis meses, cinco colunas.
+- formulário com fieldset, legend, label, input, radio, checkbox, select e textarea.
+- CSS externo predominante, interno para 3 elementos e inline em 2 situações.
+- seletores de tag, classe, ID, agrupado e encadeado; classes com prefixo thais_.
+- Grid A: repeat(3, 1fr) no catálogo de livros.
+- Grid B: 1fr 2fr 1fr na seção de metas.
+- formulário validado em JS em sete verificações, mensagens e reset().
+- recursos DOM: filtros por 6 gêneros, modal, lista dinâmica, FAQ de 6 itens,
+  4 cores e modo escuro.
 
-JAVASCRIPT
-- Validação obrigatória: formulário "Indique um livro". São 7 verificações:
-  nome, e-mail, título, gênero, nota, comentário e checkbox. Usa value,
-  trim(), Number(), if / else if / else, mensagens e reset().
-- Modal dinâmico: clique em "Ver sinopse" no catálogo.
-- Lista dinâmica: estante com adicionar, alterar status, excluir e limpar todos.
-- FAQ: 6 perguntas que abrem e fecham.
-- Troca de cor: azul, laranja, verde e rosa; modo claro/escuro.
-- Extra: filtro de seis gêneros (não é necessário depender dele como abas
-  para cumprir quatro interações, pois as quatro acima já estão presentes).
+PONTOS IMPORTANTES PARA EXPLICAR NA DEFESA
+- O Grid do catálogo tem três colunas iguais; o Grid das metas tem centro maior.
+- createElement e appendChild criam os elementos da estante.
+- remove apaga um livro da lista.
+- classList altera o tema e o status dos livros.
+- eventListener reage aos cliques e aos envios dos formulários.
+- localStorage guarda livros e meta no navegador sem um banco de dados.
+- O formulário principal usa value, trim(), Number(), if/else if/else e reset().
 
-FUNCIONAMENTO DAS METAS
-- A pessoa escolhe uma meta entre 1 e 120 livros para seis meses.
-- A meta é distribuída pelos meses e a tabela mostra lidos, faltam e situação.
-- Marcar um livro como Concluído conta no mês em que isso aconteceu.
-- Voltar seu status para Lendo ou Quero ler retira essa conclusão.
-- Estante e meta são guardadas em localStorage, neste navegador.
-- O formulário de recomendação é demonstração local; não envia dados.
-
-PARA A DEFESA ORAL
-- Explique a diferença entre Grid A (3 colunas iguais) e Grid B
-  (coluna central duas vezes maior).
-- Identifique os dois exemplos de CSS inline e três de CSS interno.
-- Explique como getElementById encontra o input da meta e como .value lê o número.
-- Explique como createElement, appendChild e remove gerenciam a estante.
-- Explique por que a validação usa preventDefault() e reset().
-- Cada função do script.js tem um comentário com sua finalidade.
+O script conserva as chaves anteriores do localStorage (bookbloom_*) para não
+perder os dados de quem já usava a versão anterior do projeto.
