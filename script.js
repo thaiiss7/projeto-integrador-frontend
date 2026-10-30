@@ -1,225 +1,166 @@
-/* BOOKBLOOM - JavaScript simples | Thaís Michel
-   DOM: eventos, arrays, funções, condições, createElement, appendChild e remove.
-*/
-
-// Informações usadas no modal dos livros.
-const livros = [
-  { titulo: 'A Biblioteca da Meia-Noite', autor: 'Matt Haig', genero: 'Fantasia', imagem: 'img/biblioteca-meia-noite.jpg', sinopse: 'Entre vidas possíveis e decisões não tomadas, uma biblioteca guarda histórias que poderiam ter acontecido.' },
-  { titulo: 'Torto Arado', autor: 'Itamar Vieira Junior', genero: 'Ficção', imagem: 'img/torto-arado.jpg', sinopse: 'Duas irmãs crescem no sertão baiano em uma narrativa sobre família, terra, memória e resistência.' },
-  { titulo: 'Verity', autor: 'Colleen Hoover', genero: 'Suspense', imagem: 'img/verity.jpg', sinopse: 'Uma escritora encontra manuscritos perturbadores ao trabalhar na casa de uma autora famosa.' },
-  { titulo: 'Pequenas Grandes Coisas', autor: 'Jodi Picoult', genero: 'Ficção', imagem: 'img/pequenas-grandes-coisas.jpg', sinopse: 'Um drama que convida à reflexão sobre injustiça, escolhas e responsabilidade.' },
-  { titulo: 'Cem Anos de Solidão', autor: 'Gabriel García Márquez', genero: 'Clássicos', imagem: 'img/cem-anos.jpg', sinopse: 'A saga da família Buendía atravessa gerações na cidade fictícia de Macondo.' },
-  { titulo: 'A Paciente Silenciosa', autor: 'Alex Michaelides', genero: 'Suspense', imagem: 'img/paciente-silenciosa.jpg', sinopse: 'Após um acontecimento misterioso, uma pintora deixa de falar e desperta a curiosidade de um terapeuta.' },
-  { titulo: 'O Hobbit', autor: 'J. R. R. Tolkien', genero: 'Fantasia', imagem: 'img/hobbit.jpg', sinopse: 'Bilbo Bolseiro deixa o conforto do Condado para viver uma aventura inesperada.' },
-  { titulo: 'Sapiens', autor: 'Yuval Noah Harari', genero: 'Não ficção', imagem: 'img/sapiens.jpg', sinopse: 'Uma visão panorâmica da história da humanidade, das primeiras sociedades até o presente.' },
-  { titulo: 'Orgulho e Preconceito', autor: 'Jane Austen', genero: 'Romance', imagem: 'img/orgulho-preconceito.jpg', sinopse: 'Elizabeth Bennet e Mr. Darcy enfrentam expectativas sociais, primeiras impressões e preconceitos.' }
-];
-
-// 1. GÊNEROS - filtra os nove cards do catálogo.
-const abas = document.querySelectorAll('.thais_aba_genero');
-const cards = document.querySelectorAll('.thais_card_livro');
-let generoSelecionado = '';
-
-function filtrarLivros(genero) {
-  generoSelecionado = genero;
-  let quantidade = 0;
-
-  cards.forEach(function (card) {
-    card.hidden = genero !== '' && card.dataset.genero !== genero;
-    if (!card.hidden) quantidade++;
-  });
-
-  abas.forEach(function (aba) {
-    aba.setAttribute('aria-pressed', String(aba.dataset.genero === genero));
-  });
-
-  document.getElementById('thais_resultado_catalogo').textContent = quantidade + (quantidade === 1 ? ' livro exibido.' : ' livros exibidos.');
-  document.getElementById('thais_info_genero').textContent = genero
-    ? 'Veja os livros deste gênero no catálogo.'
-    : 'Selecione uma categoria para filtrar o catálogo.';
+function campo(nome) {
+  return document.getElementById('' + nome);
 }
 
-abas.forEach(function (aba) {
-  aba.addEventListener('click', function () {
-    const novoGenero = generoSelecionado === aba.dataset.genero ? '' : aba.dataset.genero;
-    filtrarLivros(novoGenero);
-    document.getElementById('thais_explorar').scrollIntoView();
+// Filtros dos gêneros
+const cards = document.querySelectorAll('.card_livro');
+const generos = document.querySelectorAll('.aba_genero');
+let generoAtual = '';
+
+function filtrar(genero) {
+  generoAtual = genero;
+  let total = 0;
+  cards.forEach(function (card) {
+    card.hidden = genero !== '' && card.dataset.genero !== genero;
+    if (!card.hidden) total++;
+  });
+  generos.forEach(function (botao) {
+    botao.setAttribute('aria-pressed', botao.dataset.genero === genero);
+  });
+  campo('resultado_catalogo').textContent = total + ' livros exibidos.';
+  campo('info_genero').textContent = genero ? 'Catálogo filtrado por gênero.' : 'Selecione uma categoria para filtrar o catálogo.';
+}
+
+generos.forEach(function (botao) {
+  botao.addEventListener('click', function () {
+    filtrar(generoAtual === botao.dataset.genero ? '' : botao.dataset.genero);
+    campo('explorar').scrollIntoView();
   });
 });
-document.getElementById('thais_limpar_filtros').addEventListener('click', function () {
-  filtrarLivros('');
-});
+campo('limpar_filtros').addEventListener('click', function () { filtrar(''); });
 
-// 2. MODAL - cada livro mostra sua própria sinopse.
-const modal = document.getElementById('thais_modal');
-let livroAberto = null;
+// Modais
+const modal = campo('modal');
+let tituloAberto = '';
 
-function abrirLivro(titulo) {
-  const livro = livros.find(function (item) { return item.titulo === titulo; });
-  if (!livro) return;
-  livroAberto = livro;
-  document.getElementById('thais_modal_titulo').textContent = livro.titulo;
-  document.getElementById('thais_modal_autor').textContent = livro.autor;
-  document.getElementById('thais_modal_genero').textContent = livro.genero;
-  document.getElementById('thais_modal_sinopse').textContent = livro.sinopse;
-  document.getElementById('thais_modal_imagem').src = livro.imagem;
-  document.getElementById('thais_modal_imagem').alt = 'Capa de ' + livro.titulo;
+function dadosLivro(botao) {
+  const card = botao.closest('.card_livro');
+  return {
+    titulo: card.querySelector('h3').textContent.trim(),
+    autor: card.querySelector('.card_livro_texto > p').textContent.trim(),
+    genero: card.querySelector('.mini_genero').textContent.trim(),
+    imagem: card.querySelector('img').getAttribute('src'),
+    sinopse: card.querySelector('.sinopse').textContent.trim()
+  };
+}
+
+function abrirLivro(botao) {
+  const livro = dadosLivro(botao);
+  tituloAberto = livro.titulo;
+  campo('modal_titulo').textContent = livro.titulo;
+  campo('modal_autor').textContent = livro.autor;
+  campo('modal_genero').textContent = livro.genero;
+  campo('modal_imagem').src = livro.imagem;
+  campo('modal_imagem').alt = 'Capa de ' + livro.titulo;
+  campo('modal_sinopse').textContent = livro.sinopse;
   modal.showModal();
 }
 
-document.querySelectorAll('.thais_abrir_livro').forEach(function (botao) {
-  botao.addEventListener('click', function () { abrirLivro(botao.dataset.titulo); });
+document.querySelectorAll('.abrir_livro').forEach(function (botao) {
+  botao.addEventListener('click', function () { abrirLivro(botao); });
 });
-document.getElementById('thais_fechar_modal').addEventListener('click', function () { modal.close(); });
+campo('fechar_modal').addEventListener('click', function () { modal.close(); });
 modal.addEventListener('click', function (evento) {
   if (evento.target === modal) modal.close();
 });
 
-// 3. ESTANTE - adiciona, altera o status e remove os livros.
-// localStorage mantém os dados neste navegador.
+// Estante
 function mesAtual() {
-  const hoje = new Date();
-  return hoje.getFullYear() + '-' + String(hoje.getMonth() + 1).padStart(2, '0');
-}
-function lerDados(chave) {
-  try { return JSON.parse(localStorage.getItem(chave)); }
-  catch (erro) { return null; }
-}
-function salvarDados(chave, dados) {
-  try { localStorage.setItem(chave, JSON.stringify(dados)); }
-  catch (erro) { /* O site continua funcionando sem armazenamento. */ }
+  const data = new Date();
+  return data.getFullYear() + '-' + String(data.getMonth() + 1).padStart(2, '0');
 }
 
-const dadosSalvos = lerDados('bookbloom_estante_v2');
-const estante = Array.isArray(dadosSalvos) ? dadosSalvos : [
-  { titulo: 'A Biblioteca da Meia-Noite', estado: 'Lendo', concluidoEm: null },
+function carregar(chave, padrao) {
+  try { return JSON.parse(localStorage.getItem(chave)) ?? padrao; }
+  catch (erro) { return padrao; }
+}
+function salvar(chave, valor) {
+  try { localStorage.setItem(chave, JSON.stringify(valor)); }
+  catch (erro) {}
+}
+
+let estante = carregar('bookbloom_estante_v2', [
+  { titulo: 'Percy Jackson e o Ladrão de Raios', estado: 'Lendo', concluidoEm: null },
   { titulo: 'Sapiens', estado: 'Quero ler', concluidoEm: null },
   { titulo: 'Orgulho e Preconceito', estado: 'Concluído', concluidoEm: mesAtual() }
-];
-const metaSalva = lerDados('bookbloom_meta_v2');
-let meta = Number.isInteger(metaSalva) && metaSalva >= 1 && metaSalva <= 120 ? metaSalva : 12;
-const listaEstante = document.getElementById('thais_lista_estante');
+]);
+if (!Array.isArray(estante)) estante = [];
+let meta = Number(carregar('bookbloom_meta_v2', 12));
+if (!Number.isInteger(meta) || meta < 1 || meta > 120) meta = 12;
+const lista = campo('lista_estante');
 
-function atualizarEstante() {
-  document.getElementById('thais_numero_livros').textContent = estante.length;
-  salvarDados('bookbloom_estante_v2', estante);
+function atualizar() {
+  campo('numero_livros').textContent = estante.length;
+  salvar('bookbloom_estante_v2', estante);
   atualizarMetas();
 }
-function mensagemEstante(texto) {
-  document.getElementById('thais_feedback_estante').textContent = texto;
-}
 
-function criarLivro(livro) {
-  const item = document.createElement('li');
-  item.className = 'thais_item_estante';
+function mostrarEstante() {
+  lista.replaceChildren();
+  estante.forEach(function (livro) {
+    const item = document.createElement('li');
+    item.className = 'item_estante';
+    item.innerHTML = '<div class="item_estante_topo"><h3></h3><span class="estado"></span></div>' +
+      '<div class="item_estante_botoes"><label>Alterar status <select><option>Quero ler</option><option>Lendo</option><option>Concluído</option></select></label>' +
+      '<button type="button" class="remover">Excluir ×</button></div>';
+    item.querySelector('h3').textContent = livro.titulo;
+    item.querySelector('.estado').textContent = livro.estado;
+    if (livro.estado === 'Concluído') item.classList.add('concluido');
 
-  const topo = document.createElement('div');
-  topo.className = 'thais_item_estante_topo';
-  const titulo = document.createElement('h3');
-  titulo.textContent = livro.titulo;
-  const estado = document.createElement('span');
-  estado.className = 'thais_estado';
-  topo.appendChild(titulo);
-  topo.appendChild(estado);
-
-  const acoes = document.createElement('div');
-  acoes.className = 'thais_item_estante_botoes';
-  const rotulo = document.createElement('label');
-  rotulo.className = 'thais_controle_status';
-  rotulo.textContent = 'Alterar status ';
-  const selecao = document.createElement('select');
-  selecao.setAttribute('aria-label', 'Status de ' + livro.titulo);
-  ['Quero ler', 'Lendo', 'Concluído'].forEach(function (status) {
-    const opcao = document.createElement('option');
-    opcao.value = status;
-    opcao.textContent = status;
-    selecao.appendChild(opcao);
-  });
-  rotulo.appendChild(selecao);
-
-  const excluir = document.createElement('button');
-  excluir.type = 'button';
-  excluir.className = 'thais_remover';
-  excluir.textContent = 'Excluir ×';
-
-  function mostrarStatus() {
-    selecao.value = livro.estado;
-    estado.textContent = livro.estado;
-    item.classList.toggle('thais_concluido', livro.estado === 'Concluído');
-  }
-
-  selecao.addEventListener('change', function () {
-    if (livro.estado !== selecao.value) {
-      livro.estado = selecao.value;
+    const select = item.querySelector('select');
+    select.value = livro.estado;
+    select.addEventListener('change', function () {
+      livro.estado = select.value;
       livro.concluidoEm = livro.estado === 'Concluído' ? mesAtual() : null;
-      mostrarStatus();
-      atualizarEstante();
-      mensagemEstante('Status atualizado para ' + livro.estado + '.');
-    }
+      mostrarEstante();
+      atualizar();
+    });
+    item.querySelector('.remover').addEventListener('click', function () {
+      estante.splice(estante.indexOf(livro), 1);
+      item.remove();
+      atualizar();
+    });
+    lista.appendChild(item);
   });
-  excluir.addEventListener('click', function () {
-    estante.splice(estante.indexOf(livro), 1);
-    item.remove();
-    atualizarEstante();
-    mensagemEstante('Livro removido da estante.');
-  });
-
-  acoes.appendChild(rotulo);
-  acoes.appendChild(excluir);
-  item.appendChild(topo);
-  item.appendChild(acoes);
-  listaEstante.appendChild(item);
-  mostrarStatus();
+  atualizar();
 }
 
 function adicionarLivro(titulo, estado) {
-  const nome = titulo.trim();
-  if (!nome) { mensagemEstante('Digite um título.'); return; }
-  const repetido = estante.some(function (livro) {
-    return livro.titulo.toLowerCase() === nome.toLowerCase();
-  });
-  if (repetido) { mensagemEstante('Esse livro já está na estante.'); return; }
-
-  const novoLivro = {
-    titulo: nome,
-    estado: estado,
-    concluidoEm: estado === 'Concluído' ? mesAtual() : null
-  };
-  estante.push(novoLivro);
-  criarLivro(novoLivro);
-  atualizarEstante();
-  mensagemEstante('Livro adicionado com sucesso!');
+  titulo = titulo.trim();
+  if (!titulo) return;
+  if (estante.some(function (livro) { return livro.titulo.toLowerCase() === titulo.toLowerCase(); })) {
+    campo('feedback_estante').textContent = 'Este livro já está na estante.';
+    return;
+  }
+  estante.push({ titulo: titulo, estado: estado, concluidoEm: estado === 'Concluído' ? mesAtual() : null });
+  mostrarEstante();
+  campo('feedback_estante').textContent = 'Livro adicionado com sucesso!';
 }
 
-estante.forEach(criarLivro);
-atualizarEstante();
-
-document.getElementById('thais_form_estante').addEventListener('submit', function (evento) {
+campo('form_estante').addEventListener('submit', function (evento) {
   evento.preventDefault();
-  adicionarLivro(document.getElementById('thais_novo_livro').value,
-    document.getElementById('thais_novo_status').value);
-  document.getElementById('thais_novo_livro').value = '';
+  adicionarLivro(campo('novo_livro').value, campo('novo_status').value);
+  campo('novo_livro').value = '';
 });
-document.querySelectorAll('.thais_adicionar_catalogo').forEach(function (botao) {
-  botao.addEventListener('click', function () { adicionarLivro(botao.dataset.titulo, 'Quero ler'); });
+document.querySelectorAll('.adicionar_catalogo').forEach(function (botao) {
+  botao.addEventListener('click', function () { adicionarLivro(dadosLivro(botao).titulo, 'Quero ler'); });
 });
-document.getElementById('thais_modal_adicionar').addEventListener('click', function () {
-  if (livroAberto) adicionarLivro(livroAberto.titulo, 'Quero ler');
+campo('modal_adicionar').addEventListener('click', function () {
+  adicionarLivro(tituloAberto, 'Quero ler');
   modal.close();
 });
-document.getElementById('thais_limpar_estante').addEventListener('click', function () {
-  listaEstante.querySelectorAll('li').forEach(function (item) { item.remove(); });
-  estante.length = 0;
-  atualizarEstante();
-  mensagemEstante('Estante limpa.');
+campo('limpar_estante').addEventListener('click', function () {
+  estante = [];
+  mostrarEstante();
+  campo('feedback_estante').textContent = 'Estante limpa.';
 });
 
-// 4. METAS - distribui a meta por seis meses e atualiza a tabela 7x5.
+// Meta dos próximos seis meses
 function atualizarMetas() {
-  const tabela = document.getElementById('thais_tabela_metas_corpo');
-  tabela.replaceChildren();
+  const corpo = campo('tabela_metas_corpo');
+  corpo.replaceChildren();
+  let total = 0;
   const hoje = new Date();
-  let totalLido = 0;
 
   for (let i = 0; i < 6; i++) {
     const mes = new Date(hoje.getFullYear(), hoje.getMonth() + i, 1);
@@ -228,108 +169,94 @@ function atualizarMetas() {
     const lidos = estante.filter(function (livro) {
       return livro.estado === 'Concluído' && livro.concluidoEm === chave;
     }).length;
-    totalLido += lidos;
+    total += lidos;
     const faltam = Math.max(0, objetivo - lidos);
-    let situacao = 'Pendente';
-    let classe = 'thais_status_pendente';
-    if (objetivo === 0) situacao = 'Sem meta';
-    else if (lidos >= objetivo) { situacao = 'Concluída'; classe = 'thais_status_ok'; }
-    else if (lidos > 0) { situacao = 'Em andamento'; classe = 'thais_status_meio'; }
+    const situacao = objetivo === 0 ? 'Sem meta' : lidos >= objetivo ? 'Concluída' : lidos ? 'Em andamento' : 'Pendente';
 
     const linha = document.createElement('tr');
-    const nomeMes = mes.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
-    const colunas = [nomeMes, objetivo, lidos, faltam, situacao];
-    colunas.forEach(function (valor, indice) {
+    [mes.toLocaleDateString('pt-BR', { month: 'long' }), objetivo, lidos, faltam, situacao].forEach(function (valor, indice) {
       const celula = document.createElement(indice === 0 ? 'th' : 'td');
       celula.textContent = valor;
       if (indice === 0) celula.scope = 'row';
-      if (indice === 4) celula.className = 'thais_status ' + classe;
       linha.appendChild(celula);
     });
-    tabela.appendChild(linha);
+    corpo.appendChild(linha);
   }
 
-  const percentual = Math.min(100, Math.round(totalLido / meta * 100));
-  document.getElementById('thais_meta_total').value = meta;
-  document.getElementById('thais_meta_contador').textContent = totalLido + ' de ' + meta + ' livros concluídos';
-  document.getElementById('thais_meta_porcentagem').textContent = percentual + '%';
-  document.getElementById('thais_barra_progresso').style.width = percentual + '%';
-  document.querySelector('.thais_barra_meta').setAttribute('aria-valuenow', percentual);
-  document.getElementById('thais_resumo_metas').textContent = totalLido >= meta
-    ? 'Parabéns! Você alcançou sua meta!'
-    : 'Faltam ' + Math.max(0, meta - totalLido) + ' livros para sua meta.';
-  document.getElementById('thais_frase_metas').textContent = percentual === 100
-    ? 'META CONQUISTADA ★' : 'CONTINUE SUA JORNADA ✦';
+  const percentual = Math.min(100, Math.round(total / meta * 100));
+  campo('meta_total').value = meta;
+  campo('meta_contador').textContent = total + ' de ' + meta + ' livros concluídos';
+  campo('meta_porcentagem').textContent = percentual + '%';
+  campo('barra_progresso').style.width = percentual + '%';
+  campo('barra_meta').setAttribute('aria-valuenow', percentual);
+  campo('resumo_metas').textContent = total >= meta ? 'Parabéns! Meta alcançada!' : 'Faltam ' + (meta - total) + ' livros para sua meta.';
+  campo('frase_metas').textContent = total >= meta ? 'META CONQUISTADA ★' : 'CONTINUE SUA JORNADA ✦';
 }
 
-document.getElementById('thais_form_meta').addEventListener('submit', function (evento) {
+campo('form_meta').addEventListener('submit', function (evento) {
   evento.preventDefault();
-  const numero = Number(document.getElementById('thais_meta_total').value);
-  if (!Number.isInteger(numero) || numero < 1 || numero > 120) {
-    document.getElementById('thais_mensagem_meta').textContent = 'Digite um número entre 1 e 120.';
-  } else {
+  const numero = Number(campo('meta_total').value);
+  if (Number.isInteger(numero) && numero >= 1 && numero <= 120) {
     meta = numero;
-    salvarDados('bookbloom_meta_v2', meta);
+    salvar('bookbloom_meta_v2', meta);
     atualizarMetas();
-    document.getElementById('thais_mensagem_meta').textContent = 'Meta salva com sucesso!';
-  }
+    campo('mensagem_meta').textContent = 'Meta salva com sucesso!';
+  } else campo('mensagem_meta').textContent = 'Digite um número de 1 a 120.';
 });
 
-// 5. FAQ - abre e fecha seis respostas.
-document.querySelectorAll('.thais_pergunta_botao').forEach(function (botao) {
+// FAQ
+document.querySelectorAll('.pergunta_botao').forEach(function (botao) {
   botao.addEventListener('click', function () {
     const resposta = botao.nextElementSibling;
     resposta.hidden = !resposta.hidden;
-    botao.setAttribute('aria-expanded', String(!resposta.hidden));
+    botao.setAttribute('aria-expanded', !resposta.hidden);
     botao.querySelector('span').textContent = resposta.hidden ? '＋' : '−';
   });
 });
 
-// 6. PERSONALIZAÇÃO - quatro cores e modo escuro.
-const botoesCor = document.querySelectorAll('.thais_cor');
-botoesCor.forEach(function (botao) {
+// Quatro cores e modo escuro
+document.querySelectorAll('.cor').forEach(function (botao) {
   botao.addEventListener('click', function () {
-    document.body.classList.remove('thais_tema_azul', 'thais_tema_laranja', 'thais_tema_verde', 'thais_tema_rosa');
-    document.body.classList.add('thais_tema_' + botao.dataset.tema);
-    botoesCor.forEach(function (outro) {
-      outro.setAttribute('aria-pressed', String(outro === botao));
+    document.body.className = document.body.className.replace(/tema_\w+/g, '').trim();
+    document.body.classList.add('tema_' + botao.dataset.tema);
+    document.querySelectorAll('.cor').forEach(function (cor) {
+      cor.setAttribute('aria-pressed', cor === botao);
     });
   });
 });
-document.getElementById('thais_alternar_modo').addEventListener('click', function () {
-  const escuro = document.body.classList.toggle('thais_modo_escuro');
-  this.setAttribute('aria-pressed', String(escuro));
+campo('alternar_modo').addEventListener('click', function () {
+  const escuro = document.body.classList.toggle('modo_escuro');
   this.textContent = escuro ? '☀ Claro' : '☾ Escuro';
+  this.setAttribute('aria-pressed', escuro);
 });
 
-// 7. FORMULÁRIO - valida os sete campos obrigatórios.
-const formulario = document.getElementById('thais_formulario');
-const mensagemFormulario = document.getElementById('thais_mensagem_form');
-formulario.addEventListener('submit', function (evento) {
+// Validação do formulário
+campo('formulario').addEventListener('submit', function (evento) {
   evento.preventDefault();
-  const nome = document.getElementById('thais_nome').value.trim();
-  const email = document.getElementById('thais_email').value.trim();
-  const titulo = document.getElementById('thais_livro_indicado').value.trim();
-  const genero = document.getElementById('thais_genero_indicado').value;
-  const radio = document.querySelector('input[name="thais_nota"]:checked');
-  const nota = radio ? Number(radio.value) : 0;
-  const comentario = document.getElementById('thais_comentario').value.trim();
-  const confirmado = document.getElementById('thais_confirmacao').checked;
+  const nome = campo('nome').value.trim();
+  const email = campo('email').value.trim();
+  const titulo = campo('livro_indicado').value.trim();
+  const genero = campo('genero_indicado').value;
+  const nota = document.querySelector('input[name="nota"]:checked');
+  const comentario = campo('comentario').value.trim();
+  const mensagem = campo('mensagem_form');
   let erro = '';
 
-  if (nome.length < 2) erro = 'Digite seu nome.';
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) erro = 'Digite um e-mail válido.';
-  else if (titulo.length < 2) erro = 'Informe o título do livro.';
-  else if (!genero) erro = 'Escolha um gênero.';
-  else if (nota < 3 || nota > 5) erro = 'Escolha uma nota.';
-  else if (comentario.length < 15) erro = 'Escreva pelo menos 15 caracteres.';
-  else if (!confirmado) erro = 'Marque a caixa de confirmação.';
-  else {
-    mensagemFormulario.className = 'thais_mensagem_form thais_sucesso';
-    mensagemFormulario.textContent = 'Obrigado, ' + nome + '! Recomendação validada (demonstração).';
-    formulario.reset();
-    return;
+  if (nome.length < 2) erro = 'Informe seu nome.';
+  else if (!email.includes('@') || !email.includes('.')) erro = 'Informe um e-mail válido.';
+  else if (titulo.length < 2) erro = 'Informe o livro.';
+  else if (!genero) erro = 'Escolha o gênero.';
+  else if (!nota) erro = 'Selecione uma avaliação.';
+  else if (comentario.length < 10) erro = 'Justifique sua indicação com pelo menos 10 caracteres.';
+
+  if (erro) {
+    mensagem.className = 'erro';
+    mensagem.textContent = erro;
+  } else {
+    mensagem.className = 'sucesso';
+    mensagem.textContent = 'Recomendação validada com sucesso!';
+    evento.target.reset();
   }
-  mensagemFormulario.className = 'thais_mensagem_form thais_erro';
-  mensagemFormulario.textContent = erro;
 });
+
+mostrarEstante();
